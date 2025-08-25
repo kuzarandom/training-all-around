@@ -1,0 +1,28 @@
+{
+  "name": "typescript-react-advanced-examples",
+  "version": "1.0.0",
+  "description": "TypeScript + React Advanced Examples and Cheat Sheet",
+  "main": "index.js",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch"
+  },
+  "keywords": [
+    "typescript",
+    "react",
+    "advanced",
+    "examples",
+    "cheatsheet"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
