@@ -128,26 +128,28 @@ async function fetchUsers(): Promise<UtilityUser[]> {
 
 type FetchUsersReturn = ReturnType<typeof fetchUsers>; // Promise<UtilityUser[]>
 
-// 11. InstanceType<T> - เอา instance type จาก constructor function
-class DatabaseConnection {
+// 11. InstanceType<T> - เดิมใช้กับ class constructor, ตอนนี้จะใช้ ReturnType แทน
+interface DatabaseConnection {
   host: string;
   port: number;
-  
-  constructor(host: string, port: number) {
-    this.host = host;
-    this.port = port;
-  }
-  
-  connect(): void {
-    console.log(`Connecting to ${this.host}:${this.port}`);
-  }
+  connect(): void;
 }
 
-type DBConnectionInstance = InstanceType<typeof DatabaseConnection>;
+function createDatabaseConnection(host: string, port: number): DatabaseConnection {
+  return {
+    host,
+    port,
+    connect(): void {
+      console.log(`Connecting to ${host}:${port}`);
+    }
+  };
+}
+
+type DBConnectionInstance = ReturnType<typeof createDatabaseConnection>;
 // DatabaseConnection
 
-function createConnection(ConnectionClass: new (host: string, port: number) => DBConnectionInstance): DBConnectionInstance {
-  return new ConnectionClass("localhost", 5432);
+function createConnection(connectionFactory: (host: string, port: number) => DBConnectionInstance): DBConnectionInstance {
+  return connectionFactory("localhost", 5432);
 }
 
 // ===== ตัวอย่างการใช้ร่วมกัน =====

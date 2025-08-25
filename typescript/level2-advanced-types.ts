@@ -56,13 +56,17 @@ type NonFunctionPropertyNames<T> = {
 
 type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>;
 
-class Example {
-  name: string = "test";
-  age: number = 25;
-  greet(): void {}
+// สร้าง object ที่มีทั้ง properties และ methods
+function createExample() {
+  return {
+    name: "test" as string,
+    age: 25 as number,
+    greet(): void {}
+  };
 }
 
-type ExampleData = NonFunctionProperties<Example>; // { name: string; age: number }
+type ExampleType = ReturnType<typeof createExample>;
+type ExampleData = NonFunctionProperties<ExampleType>; // { name: string; age: number }
 
 // 4. Conditional Types → T extends U ? X : Y
 

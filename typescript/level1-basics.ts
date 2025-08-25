@@ -124,16 +124,22 @@ interface Container<T> {
   getValue(): T;
 }
 
-class Box<T> implements Container<T> {
-  constructor(public value: T) {}
-  
-  getValue(): T {
-    return this.value;
-  }
+// Generic function that creates container objects
+function createBox<T>(value: T): Container<T> {
+  return {
+    value,
+    getValue() {
+      return this.value;
+    }
+  };
 }
 
-const stringBox = new Box<string>("hello");
-const numberBox = new Box<number>(42);
+const stringBox = createBox<string>("hello");
+const numberBox = createBox<number>(42);
+
+// ใช้งาน
+console.log(stringBox.getValue()); // "hello"
+console.log(numberBox.getValue()); // 42
 
 // Generic constraints
 interface Lengthwise {
